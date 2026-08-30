@@ -12,7 +12,6 @@ class DetailScreen extends StatelessWidget {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
 
-    // the list for this city, or an empty one if it has no entries yet
     List activities = thingsToDo[place["name"]] ?? [];
 
     return Scaffold(
@@ -30,7 +29,6 @@ class DetailScreen extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // ---------- HERO PHOTO WITH THE CITY NAME ON IT ----------
           Stack(
             children: [
               Container(
@@ -47,7 +45,6 @@ class DetailScreen extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                // dark layer so the name stays readable
                 child: Container(
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -68,7 +65,6 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
 
-              // name sitting at the bottom of the photo
               Positioned(
                 left: width * 0.06,
                 right: width * 0.06,
@@ -113,7 +109,6 @@ class DetailScreen extends StatelessWidget {
 
           const SizedBox(height: 24),
 
-          // ---------- DESCRIPTION ----------
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: Text(
@@ -128,7 +123,6 @@ class DetailScreen extends StatelessWidget {
 
           const SizedBox(height: 28),
 
-          // ---------- SECTION LABEL ----------
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: Row(
@@ -163,7 +157,6 @@ class DetailScreen extends StatelessWidget {
 
           const SizedBox(height: 16),
 
-          // ---------- THE LIST ----------
           Column(
             children: List.generate(activities.length, (index) {
               Map item = activities[index];
@@ -184,7 +177,6 @@ class DetailScreen extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // numbered circle
                       Container(
                         width: 34,
                         height: 34,
@@ -238,7 +230,6 @@ class DetailScreen extends StatelessWidget {
 
           const SizedBox(height: 20),
 
-          // ---------- BACK BUTTON ----------
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: SizedBox(

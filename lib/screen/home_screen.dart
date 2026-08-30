@@ -59,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 
-      // ---------- BOTTOM NAVIGATION BAR ----------
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         onTap: (index) {
@@ -95,10 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          // ---------- HEADER: PHOTO + SEARCH BAR LAYERED ON TOP ----------
           Stack(
             children: [
-              // layer 1 — the photo and the numbers
               Container(
                 width: double.infinity,
                 height: height * 0.5,
@@ -162,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // ----- middle circle -----
                       Container(
                         width: width * 0.4,
                         height: width * 0.4,
@@ -196,7 +192,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
 
-                      // ----- right number -----
                       SizedBox(
                         width: width * 0.22,
                         child: const Column(
@@ -229,7 +224,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // layer 2 — the search bar, sitting on the photo
               Positioned(
                 left: width * 0.05,
                 right: width * 0.05,
@@ -247,7 +241,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   child: TextField(
-                    // runs on every keystroke and rebuilds the list
                     onChanged: (value) {
                       setState(() {
                         query = value;
@@ -276,7 +269,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           const SizedBox(height: 18),
 
-          // ---------- TAP TO EXPLORE ----------
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: const Row(
@@ -311,7 +303,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
           const SizedBox(height: 18),
 
-          // ---------- CITY CARDS ----------
           if (filtered.isEmpty)
             Padding(
               padding: EdgeInsets.symmetric(
