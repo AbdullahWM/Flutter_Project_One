@@ -125,7 +125,7 @@ Requires Flutter 3.x with Dart SDK 3.13.1 or newer. Configured for **Android** �
 
 ## 🙏 Credits
 
-Built by [**Abdullah AlManeea**](https://github.com/AbdullahWM). 📷 Photography of Riyadh, AlUla, Jeddah, Abha and Dammam bundled under `assets/photos/`.
+Built by [**Abdullah AlManeea**](https://github.com/AbdullahWM).
 
 <div align="center">
 
