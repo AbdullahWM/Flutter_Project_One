@@ -324,8 +324,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
-          Column(
-            children: List.generate(filtered.length, (index) {
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: filtered.length,
+            itemBuilder: (context, index) {
               CityModel city = filtered[index];
 
               return Padding(
@@ -405,7 +408,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               );
-            }),
+            },
           ),
 
           const SizedBox(height: 24),
