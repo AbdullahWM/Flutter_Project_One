@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project_1/data.dart';
+import 'package:project_1/data/data.dart';
 import 'package:project_1/screen/detail_screen.dart';
+import 'package:project_1/model/city_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // what the user typed in the search bar
   String query = "";
-
-  // which tab is selected in the bottom bar
   int selectedIndex = 0;
+
+  List<CityModel> cityList = [];
+  void getData() {
+    for (var item in places) {
+      CityModel cityModel = CityModel.fromJson(item);
+      cityList.add(cityModel);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
     double height = MediaQuery.sizeOf(context).height;
 
     // only the cities whose name contains what was typed
-    List filtered = places.where((place) {
-      return place["name"].toString().toLowerCase().contains(
-        query.toLowerCase(),
-      );
+    List<CityModel> filtered = cityList.where((city) {
+      return city.name!.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
     return Scaffold(
@@ -170,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "${places.length}",
+                              "${cityList.length}",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: width * 0.15,
@@ -234,7 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.12),
+                        color: Colors.black.withValues(alpha: 0.12),
                         blurRadius: 20,
                         offset: const Offset(0, 8),
                       ),
@@ -317,7 +326,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
           Column(
             children: List.generate(filtered.length, (index) {
-              Map place = filtered[index];
+              CityModel city = filtered[index];
 
               return Padding(
                 padding: EdgeInsets.only(
@@ -331,7 +340,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DetailScreen(place: place),
+                        builder: (context) => DetailScreen(city: city),
                       ),
                     );
                   },
@@ -347,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(14),
                           child: Image.asset(
-                            place["image"],
+                            city.image!,
                             width: width * 0.22,
                             height: width * 0.22,
                             fit: BoxFit.cover,
@@ -372,7 +381,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                place["name"],
+                                city.name!,
                                 style: GoogleFonts.playfairDisplay(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
@@ -380,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(height: 4),
                               Text(
-                                place["description"],
+                                city.description!,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -391,7 +400,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   ),

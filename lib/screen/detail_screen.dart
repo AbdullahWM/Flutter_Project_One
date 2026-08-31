@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project_1/data.dart';
+import 'package:project_1/model/activity_model.dart';
+import 'package:project_1/model/city_model.dart';
 
 class DetailScreen extends StatelessWidget {
-  final Map place;
-
-  const DetailScreen({super.key, required this.place});
+  final CityModel city;
+  const DetailScreen({super.key, required this.city});
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
 
-    List activities = thingsToDo[place["name"]] ?? [];
 
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
@@ -41,7 +40,7 @@ class DetailScreen extends StatelessWidget {
                     bottomRight: Radius.circular(24),
                   ),
                   image: DecorationImage(
-                    image: AssetImage(place["image"]),
+                    image: AssetImage(city.image!),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -93,7 +92,7 @@ class DetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      place["name"],
+                      city.name!,
                       style: GoogleFonts.playfairDisplay(
                         color: Colors.white,
                         fontSize: 40,
@@ -112,7 +111,7 @@ class DetailScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: Text(
-              place["description"],
+              city.description!,
               style: const TextStyle(
                 fontSize: 15,
                 height: 1.6,
@@ -144,7 +143,7 @@ class DetailScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  "${activities.length}",
+                  "${city.thingsToDo!.length}",
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -158,8 +157,8 @@ class DetailScreen extends StatelessWidget {
           const SizedBox(height: 16),
 
           Column(
-            children: List.generate(activities.length, (index) {
-              Map item = activities[index];
+            children: List.generate(city.thingsToDo!.length, (index) {
+              ActivityModel item = city.thingsToDo![index];
 
               return Padding(
                 padding: EdgeInsets.only(
@@ -202,7 +201,7 @@ class DetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              item["title"],
+                              item.title!,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -211,7 +210,7 @@ class DetailScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              item["note"],
+                              item.note!,
                               style: const TextStyle(
                                 fontSize: 13,
                                 height: 1.45,
