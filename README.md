@@ -71,11 +71,25 @@ Most travel apps drown you in listings. Wejha does the opposite: five cities, fi
 
 ```
 lib/
-├── main.dart                  # MaterialApp entry point
-├── data.dart                  # cities + things-to-do, keyed by city name
+├── main.dart                    # MaterialApp entry point
+├── data/
+│   └── data.dart                # cities, each with its own things-to-do list
+├── model/
+│   ├── city_model.dart          # CityModel + fromJson
+│   └── activity_model.dart      # ActivityModel + fromJson
 └── screen/
-    ├── home_screen.dart       # stateful: search query, tab index, city list
-    └── detail_screen.dart     # stateless: renders whatever city it's handed
+    ├── home_screen.dart         # stateful: search query, tab index, city list
+    └── detail_screen.dart       # stateless: renders whatever city it's handed
+
+assets/
+└── photos/
+    ├── gradient.jpg             # home screen hero
+    └── cities/                  # one photo per city, named to match data.dart
+        ├── riyadh.jpg
+        ├── alula.jpg
+        ├── jeddah.jpg
+        ├── abha.jpg
+        └── dammam.jpg
 ```
 
 Deliberately flat. `HomeScreen` is the only stateful widget in the app — it owns the search query and the selected tab, and nothing else needs to. `DetailScreen` is pure: give it a city map, it renders. No state management package, no dependency injection, no ceremony for a four-file app.
